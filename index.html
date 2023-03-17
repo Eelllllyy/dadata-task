@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eelllllyy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="main">
+    <form class="form flex">
+      <div class="search-container">
+        <label for="query"> <b>Компания или ИП</b></label>
+        <input id="query" type="text" placeholder="Введите название, ИНН, ОГРН или адрес организации" autocomplete="off" class="input search-all">
+        <div id="check" style="display: none;">
+          <div id="result">
+          </div>
+        </div>
+      </div>
+      <div class="organization" id="organization">
+        <span>Организация</span>
+      </div>
+      <label for="shortTitle" class="label flex">Краткое наименование
+        <input id="shortTitle" type="text" class="input" autocomplete="off">
+      </label>
+      <label for="fullTitle" class="label flex">Полное наименование 
+        <input id="fullTitle" type="text" class="input" autocomplete="off">
+      </label>
+      <label for="inn" class="label flex">ИНН / КПП
+        <input id="inn" type="text" class="input" autocomplete="off">
+      </label>
+      <label for="address" class="label flex">Адрес
+        <input id="address"type="text" class="input" autocomplete="off">
+      </label>
+    </form>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
