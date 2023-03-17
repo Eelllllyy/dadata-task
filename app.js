@@ -20,16 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
     ).then((res) => res.text().then((result) => {
       suggestions = JSON.parse(result).suggestions;
     })).catch((error) => console.log('error', error));
-    const x = document.getElementById('check');
-    const r = document.getElementById('result');
+    const checkContainer = document.getElementById('check');
+    const resultSearch = document.getElementById('result');
     const ul = document.createElement('ul');
-    while (r.firstChild) {
-      r.removeChild(r.firstChild);
+    while (resultSearch.firstChild) {
+      resultSearch.removeChild(resultSearch.firstChild);
     }
     ul.classList.add('list');
     ul.setAttribute('id', 'theList');
     if (input.value.length > 0 && suggestions.length > 0) {
-      x.style.display = 'block';
+      checkContainer.style.display = 'block';
       const notion = document.createElement('p');
       const text = document.createTextNode('Выберите вариант или продолжите ввод');
       notion.appendChild(text);
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       notFound.classList.add('gray-text', 'smaller');
       ul.appendChild(notFound);
     } else {
-      x.style.display = 'none';
+      checkContainer.style.display = 'none';
     }
     for (let i = 0; i <= suggestions.length - 1; i++) {
       const li = document.createElement('li');
@@ -55,10 +55,16 @@ document.addEventListener('DOMContentLoaded', () => {
       address.innerHTML = suggestions[i]?.data?.address?.value;
       const searchText = e.target.value;
       const regex = new RegExp(searchText, 'gi');
-      let text = title.innerHTML;
-      text = text.replace(/(<span style="color: blue;">|<\/span>)/gim, '');
-      const newText = text.replace(regex, '<span style="color: blue;">$&</span>');
-      title.innerHTML = newText;
+      let textTitle = title.innerHTML;
+      textTitle = textTitle.replace(/(<span style="color: blue;">|<\/span>)/gim, '');
+      const newTextTitle = textTitle.replace(regex, '<span style="color: rgb(83 167 255);">$&</span>');
+      title.innerHTML = newTextTitle;
+      let textKpp = kpp.innerHTML;
+      const newTextKpp = textKpp.replace(regex, '<span style="color: rgb(83 167 255);">$&</span>');
+      kpp.innerHTML = newTextKpp;
+      let textAddress = address.innerHTML;
+      const newTextAdress = textAddress.replace(regex, '<span style="color: rgb(83 167 255);">$&</span>');
+      address.innerHTML = newTextAdress;
       kpp.classList.add('gray-text');
       address.classList.add('gray-text');
       li.setAttribute('style', 'display: block;');
@@ -67,13 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
       li.appendChild(address);
       li.onclick = (e) => {
         e.stopPropagation();
-        selectOne(i);
+        selectValue(i);
       };
       ul.appendChild(li);
     }
-    r.appendChild(ul);
+    resultSearch.appendChild(ul);
   };
-  function selectOne(i) {
+  function selectValue(i) {
     if (organization.children.length > 1) {
       organization.removeChild(organization.lastElementChild);
     }
